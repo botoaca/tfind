@@ -12,11 +12,11 @@ tfind is highly expandable and modular. to use tfind, you only have to build the
 | rutracker | ❌     |
 
 #### Legend:
-|||
-|-|-|
-|✅|Complete|
-|❔|See observations|
-|❌|Incomplete|
+| Symbol |      Status      |
+|--------|------------------|
+|   ✅   | Complete         |
+|   ❔   | See observations |
+|   ❌   | Incomplete       |
 
 ## Third party dependencies
 for some components, json parsing is required. for that, the [parson](https://github.com/kgabis/parson) has been used.
