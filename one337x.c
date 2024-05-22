@@ -9,10 +9,8 @@ https://1337x.to/search/the+oak+1992/1/
 */
 
 static char* str_replace(const char *str, char find, char replace) {
-    char *result = strdup(str);
-    for (int i = 0; result[i] != '\0'; i++) {
-        if (result[i] == find) result[i] = replace;
-    }
+    char* result = strdup(str);
+    for (int i = 0; result[i] != '\0'; i++) if (result[i] == find) result[i] = replace;
     return result;
 }
 
