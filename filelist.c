@@ -42,9 +42,7 @@ void _ovrd_filelist(char* query) {
 
         res = curl_easy_perform(curl_handle);
 
-        if (res != CURLE_OK) {
-            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
-        }
+        if (res != CURLE_OK) fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
         curl_easy_cleanup(curl_handle);
     }
 
