@@ -18,7 +18,7 @@ tfind is highly expandable and modular. to use tfind, you only have to build the
 |   ❔   | See observations |
 |   ❌   | Incomplete       |
 
-## Third party dependencies
+## Third-party Dependencies
 for some components, json parsing is required. for that, the [parson](https://github.com/kgabis/parson) has been used.
 
 ## Building
