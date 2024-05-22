@@ -1,0 +1,1 @@
+gcc main.c parson.c credentials.c filelist.c one337x.c rutracker.c -o tfind -lcurl
