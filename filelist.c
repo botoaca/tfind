@@ -20,19 +20,22 @@ void _ovrd_filelist(char* query) {
     curl_handle = curl_easy_init();
 
     memory chunk = {0};
-    if (curl_handle) {
-        char url[512];
-        sprintf(url, "https://filelist.io/api.php?username=%s&passkey=%s&action=search-torrents&type=imdb&query=%s", creds.username, creds.passkey, query);
-        curl_easy_setopt(curl_handle, CURLOPT_URL, url);
-
-        curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, write_mem_cb);
-        curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, (void*)&chunk);
-
-        res = curl_easy_perform(curl_handle);
-
-        if (res != CURLE_OK) fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
-        curl_easy_cleanup(curl_handle);
+    if (!curl_handle) {
+        fprintf(stderr, "curl_easy_init() failed\n");
+        exit(1);
     }
+
+    char url[512];
+    sprintf(url, "https://filelist.io/api.php?username=%s&passkey=%s&action=search-torrents&type=imdb&query=%s", creds.username, creds.passkey, query);
+    curl_easy_setopt(curl_handle, CURLOPT_URL, url);
+
+    curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, write_mem_cb);
+    curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, (void*)&chunk);
+
+    res = curl_easy_perform(curl_handle);
+
+    if (res != CURLE_OK) fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+    curl_easy_cleanup(curl_handle);
 
     JSON_Value *root_value;
     JSON_Array *torrents;

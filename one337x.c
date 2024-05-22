@@ -24,22 +24,25 @@ void _ovrd_one337x(char* query) {
     curl_handle = curl_easy_init();
 
     memory chunk = {0};
-    if (curl_handle) {
-        char url[512];
-        sprintf(url, "https://1337x.to/search/%s/1/", str_replace(query, ' ', '+'));
-        curl_easy_setopt(curl_handle, CURLOPT_URL, url);
-
-        curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, write_mem_cb);
-        curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, (void*)&chunk);
-
-        res = curl_easy_perform(curl_handle);
-
-        if (res != CURLE_OK) fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
-        curl_easy_cleanup(curl_handle);
+    if (!curl_handle) {
+        fprintf(stderr, "curl_easy_init() failed\n");
+        exit(1);
     }
 
+    char url[512];
+    sprintf(url, "https://1337x.to/search/%s/1/", str_replace(query, ' ', '+'));
+    curl_easy_setopt(curl_handle, CURLOPT_URL, url);
+
+    curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, write_mem_cb);
+    curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, (void*)&chunk);
+
+    res = curl_easy_perform(curl_handle);
+
+    if (res != CURLE_OK) fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+    curl_easy_cleanup(curl_handle);
+
     printf("%-50s %s\n", "Name", "Download Link");
-    char url[256], text[256];
+    char t_url[256], text[256];
     while ((chunk.response = strstr(chunk.response, "<td class=\"coll-1 name\"")) != NULL) {
         chunk.response = strstr(chunk.response, "<a href=\"/torrent/");
         if (chunk.response == NULL) break;
@@ -48,7 +51,7 @@ void _ovrd_one337x(char* query) {
         char* url_end = strstr(chunk.response, "\">");
         if (url_end == NULL) break;
         *url_end = '\0';
-        sprintf(url, "https://1337x.to%s", chunk.response);
+        sprintf(t_url, "https://1337x.to%s", chunk.response);
 
         chunk.response = url_end + 2;
         char* text_end = strstr(chunk.response, "</a>");
@@ -58,7 +61,7 @@ void _ovrd_one337x(char* query) {
 
         printf("%-50.50s %s\n",
             text,
-            url
+            t_url
         );
 
         chunk.response = text_end + 4;
