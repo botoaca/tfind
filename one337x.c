@@ -64,10 +64,7 @@ void _ovrd_one337x(char* query) {
 
         buf = url_end + 2;
         char *text_end = strstr(buf, "</a>");
-        if (text_end == NULL) {
-            printf("No results found\n");
-            break;
-        }
+        if (text_end == NULL) break;
         *text_end = '\0';
         strcpy(text, buf);
 
