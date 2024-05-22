@@ -8,8 +8,15 @@ tfind is highly expandable and modular. to use tfind, you only have to build the
 | Tracker   | Status |
 |-----------|--------|
 | Filelist  | ✅     |
-| 1337x     | ❌     |
+| 1337x     | ❔     |
 | rutracker | ❌     |
+
+#### Legend:
+|||
+|-|-|
+|✅|Complete|
+|❔|See observations|
+|❌|Incomplete|
 
 ## Third party dependencies
 for some components, json parsing is required. for that, the [parson](https://github.com/kgabis/parson) has been used.
@@ -24,4 +31,5 @@ gcc main.c one337x.c -o tfind -lcurl (builds 1337x only)
 ```
 
 ## Observations
-in order to use the filelist component, a credentials file is needed. the `creds_filelist.txt` should look like this: `[username] [passkey]`.
+- in order to use the filelist component, a credentials file is needed. the `creds_filelist.txt` should look like this: `[username] [passkey]`.
+- while using the 1337x component, sometimes the results are empty/incomplete. there must be something wrong with the web scraping.
