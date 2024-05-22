@@ -8,8 +8,8 @@ tfind is highly expandable and modular. to use tfind, you only have to build the
 | Tracker   | Status |
 |-----------|--------|
 | Filelist  | ✅     |
-| 1337x     | ❔     |
-| rutracker | ❌     |
+| 1337x     | ✅     |
+| rutracker | ✅     |
 
 #### Legend:
 | Symbol |      Status      |
@@ -25,11 +25,12 @@ for some components, json parsing is required. for that, the [parson](https://gi
 to customize your tfind build, modify the given `build.sh` script
 examples:
 ```
-gcc main.c parson.c credentials.c filelist.c -o tfind -lcurl (builds filelist only)
-gcc main.c credentials.c one337x.c rutracker.c -o tfind -lcurl (builds 1337x + rutracker)
-gcc main.c one337x.c -o tfind -lcurl (builds 1337x only)
+gcc main.c parson.c curl_callbacks.c credentials.c filelist.c -o tfind -lcurl (builds filelist only)
+gcc main.c convert_encoding.c curl_callbacks.c credentials.c one337x.c rutracker.c -o tfind -lcurl -liconv (builds 1337x + rutracker)
+gcc main.c curl_callbacks.c one337x.c -o tfind -lcurl (builds 1337x only)
 ```
 
 ## Observations
 - in order to use the filelist component, a credentials file is needed. the `creds_filelist.txt` should look like this: `[username] [passkey]`.
-- while using the 1337x component, sometimes the results are empty/incomplete. there must be something wrong with the web scraping.
+- in order to use the rutracker component, a credentials file is needed. the `creds_rutracker.txt` should look like this: `[username] [password]`.
+- while using the rutracker component, a `cookies_rutracker.txt` file will be created.

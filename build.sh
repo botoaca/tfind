@@ -1,1 +1,1 @@
-gcc main.c parson.c credentials.c filelist.c one337x.c rutracker.c -o tfind -lcurl
+gcc main.c convert_encoding.c curl_callbacks.c parson.c credentials.c filelist.c one337x.c rutracker.c -o tfind -lcurl -liconv

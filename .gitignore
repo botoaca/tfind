@@ -1,2 +1,5 @@
-creds_filelist.txt
+creds_*.txt
+cookies_*.txt
+libcurl_sample*
+*.html
 tfind

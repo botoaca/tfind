@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "credentials.h"
 
 credentials read_credentials(const char* filename) {
